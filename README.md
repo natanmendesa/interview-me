@@ -41,12 +41,30 @@ Pronto quando: todas as etapas estiverem completas, cada número tiver fonte e d
 
 ### Claude Code, como plugin (recomendado)
 
+Dentro de uma sessão interativa do `claude`, no terminal:
+
 ```bash
 /plugin marketplace add natanmendesa/interview-me
 /plugin install interview-me@interview-me
 ```
 
+Ou direto num terminal comum, sem abrir o `claude` (um comando por vez):
+
+```bash
+claude plugin marketplace add natanmendesa/interview-me
+```
+
+```bash
+claude plugin install interview-me@interview-me
+```
+
+Para conferir, rode `claude plugin list`: deve aparecer `interview-me@interview-me` com `Status: enabled`. A skill aparece nas **próximas sessões** do Claude Code, como `/interview-me:interview-me`.
+
+> Os comandos que começam com `/plugin` só funcionam numa sessão interativa do `claude` no terminal, e não no app desktop. Se eles não funcionarem, use as versões `claude plugin ...` acima. Mais casos em [Solução de problemas](#solução-de-problemas).
+
 ### Claude Code, manualmente
+
+Rode numa pasta qualquer fora dos seus projetos (por exemplo, `cd ~/Downloads`): o `git clone` cria a pasta `interview-me/` onde você estiver, e depois da cópia você pode apagá-la.
 
 ```bash
 git clone https://github.com/natanmendesa/interview-me.git
@@ -54,12 +72,22 @@ mkdir -p ~/.claude/skills
 cp -r interview-me/skills/interview-me ~/.claude/skills/
 ```
 
-Para usar só em um projeto, copie a pasta para `.claude/skills/` dentro dele.
+Instalada assim, a skill aparece como `/interview-me`, nas próximas sessões. Para usar só em um projeto, copie a pasta para `.claude/skills/` dentro dele.
 
 ### Claude.ai e app do Claude
 
 1. Baixe o arquivo `interview-me.skill` na [página de Releases](../../releases).
 2. Abra o arquivo no Claude e use o botão **Save skill**, ou envie o `.skill` em Configurações, na área de skills.
+
+## Solução de problemas
+
+| O que acontece | Causa provável | O que fazer |
+| --- | --- | --- |
+| `/plugin` não funciona ou não é reconhecido | Esses comandos só existem numa sessão interativa do `claude` no terminal, não no app desktop | Use `claude plugin marketplace add natanmendesa/interview-me` e `claude plugin install interview-me@interview-me` num terminal comum |
+| Erro ao adicionar o marketplace (repositório não encontrado, 404) | O repositório está privado ou o nome está errado | Confira o nome `natanmendesa/interview-me`. Se o repositório for privado, torne-o público (Settings, Danger Zone, Change repository visibility) ou deixe o GitHub autenticado no computador |
+| Aparece `SSH not configured, cloning via HTTPS` | É só um aviso: o Claude Code tentou SSH e usou HTTPS | Nada. A instalação segue normalmente |
+| A skill não aparece depois de instalar | As skills são carregadas quando a sessão começa | Abra uma nova sessão do Claude Code |
+| Não sei se instalou | | `claude plugin list` deve mostrar `interview-me@interview-me` com `Status: enabled` |
 
 ## Estrutura
 
@@ -88,14 +116,22 @@ O `SKILL.md` fica enxuto e os detalhes ficam em `references/`, que a skill só l
 
 1. Altere os arquivos em `skills/interview-me/` e atualize o `CHANGELOG.md`.
 2. Atualize `version` em `.claude-plugin/plugin.json`.
-3. Crie e envie uma tag:
+3. Valide os manifestos, na raiz do repositório:
 
-```bash
-git tag v3.0.1
-git push origin v3.0.1
-```
+   ```bash
+   claude plugin validate .
+   ```
+
+4. Crie e envie uma tag:
+
+   ```bash
+   git tag v3.0.1
+   git push origin v3.0.1
+   ```
 
 O workflow gera o `interview-me.skill` e o anexa à release.
+
+Para outras pessoas instalarem pelo `/plugin marketplace`, o repositório precisa estar **público**.
 
 ## Fontes das boas práticas
 
