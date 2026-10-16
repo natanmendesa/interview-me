@@ -49,7 +49,7 @@ Pronto quando: todas as etapas estiverem completas, cada número tiver fonte e d
 ### Claude Code, manualmente
 
 ```bash
-git clone https://github.com/DONO/interview-me.git
+git clone https://github.com/natanmendesa/interview-me.git
 mkdir -p ~/.claude/skills
 cp -r interview-me/skills/interview-me ~/.claude/skills/
 ```
