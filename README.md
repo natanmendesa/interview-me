@@ -42,11 +42,9 @@ Pronto quando: todas as etapas estiverem completas, cada número tiver fonte e d
 ### Claude Code, como plugin (recomendado)
 
 ```bash
-/plugin marketplace add DONO/interview-me
+/plugin marketplace add natanmendesa/interview-me
 /plugin install interview-me@interview-me
 ```
-
-Troque `DONO` pelo usuário ou organização do GitHub onde você publicar o repositório. Instalada como plugin, a skill aparece como `/interview-me:interview-me`.
 
 ### Claude Code, manualmente
 
