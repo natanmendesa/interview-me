@@ -1,0 +1,10 @@
+{
+  "name": "interview-me",
+  "version": "3.0.0",
+  "description": "Entrevista você a partir de um prompt rascunho e devolve um prompt preciso, seguindo as boas práticas da Anthropic, OpenAI e Google.",
+  "author": {
+    "name": "Natan"
+  },
+  "license": "MIT",
+  "keywords": ["prompt", "prompt-engineering", "claude", "skill", "interview"]
+}

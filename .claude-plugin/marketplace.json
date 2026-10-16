@@ -1,0 +1,13 @@
+{
+  "name": "interview-me",
+  "owner": {
+    "name": "Natan"
+  },
+  "plugins": [
+    {
+      "name": "interview-me",
+      "source": "./",
+      "description": "Skill que entrevista você sobre um prompt rascunho e devolve um prompt melhorado, com modos rápido, profundo e depurar."
+    }
+  ]
+}

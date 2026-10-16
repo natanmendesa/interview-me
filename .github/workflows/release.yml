@@ -1,0 +1,32 @@
+name: Release
+
+# Ao criar uma tag como v3.0.0, empacota a skill e anexa o arquivo interview-me.skill à release.
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Conferir o frontmatter da skill
+        run: |
+          head -n 5 skills/interview-me/SKILL.md | grep -q '^name: interview-me$'
+          grep -q '^description: ' skills/interview-me/SKILL.md
+
+      - name: Empacotar a skill
+        run: |
+          cd skills
+          zip -r ../interview-me.skill interview-me -x "*.DS_Store"
+
+      - name: Publicar a release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: interview-me.skill
+          generate_release_notes: true
